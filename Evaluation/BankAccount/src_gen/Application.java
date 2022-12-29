@@ -21,20 +21,8 @@ public class Application {
 	@ ensures true;
 	@ assignable \nothing;
 	@*/
-	public void original_original_nextDay() {
-		;
-
-	}
-
-	/*@
-	@ normal_behavior
-	@ requires true;
-	@ ensures a.withdrawDaily == 0;
-	@ assignable \nothing;
-	@*/
 	public void original_nextDay() {
-		original_original_nextDay();
-		a.withdrawDaily = 0;
+		;
 
 	}
 

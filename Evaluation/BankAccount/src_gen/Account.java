@@ -34,7 +34,7 @@ public class Account {
 	/*@
 	@ normal_behavior
 	@ requires true;
-	@ ensures (\result == false ==> balance == \old(balance)) && (\result == true ==> balance == \old(balance) + -x)  && (\result == false ==> withdrawDaily == \old(withdrawDaily)) &&  (\result == true ==> withdrawDaily >= \old(withdrawDaily)) && (\result == false ==> withdrawHourly == \old(withdrawHourly)) &&  (\result == true ==> withdrawHourly >= \old(withdrawHourly));
+	@ ensures (\result == false ==> balance == \old(balance)) && (\result == true ==> balance == \old(balance) + -x)  && (\result == false ==> withdrawHourly == \old(withdrawHourly)) &&  (\result == true ==> withdrawHourly >= \old(withdrawHourly));
 	@ assignable \nothing;
 	@*/
 	public boolean undoUpdate(int x) {
@@ -46,10 +46,10 @@ public class Account {
 		if (x < 0) {
 			newWithdrawDaily -= x;
 			newWithdrawHourly -= x;
-			if (!newWithdrawDaily >= DAILY_LIMIT && newWithdrawHourly >= HOURLY_LIMIT) {
+			if (!newWithdrawHourly >= HOURLY_LIMIT) {
 				ret = false;
 				return ret;
-			} else if (newWithdrawDaily >= DAILY_LIMIT && newWithdrawHourly >= HOURLY_LIMIT) {
+			} else if (newWithdrawHourly >= HOURLY_LIMIT) {
 				;
 			}
 		} else if (x >= 0) {
@@ -91,7 +91,7 @@ public class Account {
 	/*@
 	@ normal_behavior
 	@ requires true;
-	@ ensures (\result == false ==> balance == \old(balance)) && (\result == true ==> balance == \old(balance) + x)  && (\result == false ==> (withdrawDaily == \old(withdrawDaily))) && (\result == true ==> (withdrawDaily <= \old(withdrawDaily))) && (\result == false ==> (withdrawHourly == \old(withdrawHourly))) && (\result == true ==> (withdrawHourly <= \old(withdrawHourly)));
+	@ ensures (\result == false ==> balance == \old(balance)) && (\result == true ==> balance == \old(balance) + x)  && (\result == false ==> (withdrawHourly == \old(withdrawHourly))) && (\result == true ==> (withdrawHourly <= \old(withdrawHourly)));
 	@ assignable \nothing;
 	@*/
 	public boolean update(int x) {
@@ -103,10 +103,10 @@ public class Account {
 		if (x < 0) {
 			newWithdrawDaily += x;
 			newWithdrawHourly += x;
-			if (!newWithdrawDaily >= DAILY_LIMIT && newWithdrawHourly >= HOURLY_LIMIT) {
+			if (!newWithdrawHourly >= HOURLY_LIMIT) {
 				ret = false;
 				return ret;
-			} else if (newWithdrawDaily >= DAILY_LIMIT && newWithdrawHourly >= HOURLY_LIMIT) {
+			} else if (newWithdrawHourly >= HOURLY_LIMIT) {
 				;
 			}
 		} else if (x >= 0) {
@@ -125,7 +125,7 @@ public class Account {
 
 	}
 
-// Code from C:/Users/mko/Documents/ISF/0_partialproofs/CorC/BankAccountNew/src/Account_helper.java
+// Code from C:/mthesisgit/first/VarCorCVarSpecs/Evaluation/BankAccount/src/Account_helper.java
 	final static int INTEREST_RATE = 2;
 	
 	/*@
@@ -152,5 +152,5 @@ public class Account {
 		result = result / 24;
 		return result; 
 	}
-// End of code from C:/Users/mko/Documents/ISF/0_partialproofs/CorC/BankAccountNew/src/Account_helper.java
+// End of code from C:/mthesisgit/first/VarCorCVarSpecs/Evaluation/BankAccount/src/Account_helper.java
 }
